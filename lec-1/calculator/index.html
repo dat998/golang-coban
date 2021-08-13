@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .calculator{
+            margin: 0;
+            padding: 0;
+            height: 600px;
+            width: 300px;
+            background-color: rgb(94, 105, 105);
+        }
+        .tieu-de{
+            display: block;
+            height: 25%;
+            width: auto;
+            background-color: rgb(138, 178, 180);
+        }
+        .number{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 75%;
+        }
+        .tab-number{
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+        .tab-number tr{
+            width: 100%;
+            height: 25%;
+        }
+        .tab-number tr, button{
+            height: 25%;
+            width: 25%;
+            background-color: cadetblue;
+            border-radius: 10%;
+            text-align: center;
+        }
+    </style>
+    <script>
+       // var nums = document.getElementsByClassName("value").innerHTML;
+        //var math = document.getElementById("math1");
+
+        var num2;
+        var num1;
+        var sign;
+        var num = num1;
+        function myFunc(obj){
+            document.getElementById("sign1").innerHTML = obj.value
+            sign = document.getElementById("sign1").innerHTML
+            console.log(sign)
+        }
+        function clickNumber(obj){
+            // document.getElementById("math1").innerHTML += obj.value
+            // num1 = document.getElementById("math1").innerHTML
+            // console.log(num)
+            //if(document.getElementById("sign1").innerHTML=="+"||document.getElementById("sign1").innerHTML=="-"||document.getElementById("sign1").innerHTML=="*"||document.getElementById("sign1").innerHTML=="/"){
+               
+            if(document.getElementById("sign1").innerHTML=="sign"){
+                document.getElementById("math1").innerHTML += obj.value
+                num1 = document.getElementById("math1").innerHTML
+                console.log(num1)
+            }else{
+                document.getElementById("math2").innerHTML += obj.value
+                num2 = document.getElementById("math2").innerHTML
+                console.log(num2)
+            }
+        }
+        function equal(){
+            document.getElementById("result").innerHTML =parseFloat(num1)+parseFloat(num2)
+        }
+        function clear(){
+            document.getElementById("sign1").innerHTML =" "
+            document.getElementById("math1").innerHTML =" "
+            document.getElementById("math2").innerHTML = " "
+            document.getElementById("result").innerHTML = " "
+        }
+
+    </script>
+</head>
+<body>
+    <div class="calculator">
+        <div class="tieu-de">
+            <p id="math1" style="font-size: 30px;float: right;margin: 0;padding: 0;width: 100%;height: 30px;"></p>
+            <p id="sign1" style="font-size: 20px;float: left;margin: 0;padding: 0;width: 100%;">sign</p>
+            <p id="math2" style="font-size: 30px;float: right;margin: 0;padding: 0;width: 100%;height: 30px;"></p>
+            <p id="result" style="font-size: 30px;float: right;margin: 0;padding: 0;">result</p>
+        </div>
+        <div class="number">
+            <table class="tab-number">
+
+                <tr>
+                    <button name="sign" class="math" value="+" onclick="myFunc(this)">+</button>
+                    <button name="sign" class="math" value="-" onclick="myFunc(this)">-</button>
+                    <button name="sign" class="math" value="*" onclick="myFunc(this)">*</button>
+                    <button name="sign" class="math" value="/" onclick="myFunc(this)">/</button>
+                </tr>
+                <tr>
+                    <button class="value" value="1" onclick="clickNumber(this)">1</button>
+                    <button class="value" value="2" onclick="clickNumber(this)">2</button>
+                    <button class="value" value="3" onclick="clickNumber(this)">3</button>
+                    <button class="value" value="4" onclick="clickNumber(this)">4</button>
+                </tr>
+                <tr>
+                    <button class="value" value="5" onclick="clickNumber(this)">5</button>
+                    <button class="value" value="6" onclick="clickNumber(this)">6</button>
+                    <button class="value" value="7" onclick="clickNumber(this)">7</button>
+                    <button class="value" value="8" onclick="clickNumber(this)">8</button>
+                </tr>
+                <tr>
+                    <button class="value" value="9" onclick="clickNumber(this)">9</button>
+                    <button class="value" value="0" onclick="clickNumber(this)">0</button>
+                    <button class="value" value="ac" onclick="clear()">ac</button>
+                    <button class="value" value="=" onclick="equal()">=</button>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
