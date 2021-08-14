@@ -1,11 +1,11 @@
 package main
 
 import (
-	"crypto/tls"
+	"database/sql"
 	"fmt"
-	"io/ioutil"
-	"net/http"
 	"os"
+
+	_ "github.com/go-sql-diver/mysql"
 )
 
 type Welcome struct {
@@ -14,31 +14,42 @@ type Welcome struct {
 }
 
 func main() {
-	//
-	baseURL := "https://template-homedecor.onshopbase.com/collections/new-arrivals"
-	config := &tls.Config{
-		InsecureSkipVerify: true,
+	fmt.Println("Go MySQL Tutorial")
+	db, err := sql.Open("mysql", "root:passeord@tcp(127.0.0.1:3306)/testdb")
+	if err != nil {
+		panic(err.Error())
 	}
-	transport := &http.Transport{
-		TLSClientConfig: config,
-	}
-	netClient := &http.Client{
-		Transport: transport,
-	}
-	response, err := netClient.Get(baseURL)
-	checkErr(err)
-	body, err := ioutil.ReadAll(response.Body)
-	checkErr(err)
-	fmt.Println(string(body))
-	response.Body.Close()
+	defer db.Close()
 
-	//hello
-	//var hello = "hello dat"
-	http.HandleFunc("/hello-world", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, string(body))
-	})
-	fmt.Print("hello")
-	http.ListenAndServe(":3000", nil)
+	fmt.Println("Successfully connected to mysql database")
+	//
+	// baseURL := "https://template-homedecor.onshopbase.com/collections/new-arrivals"
+	// config := &tls.Config{
+	// 	InsecureSkipVerify: true,
+	// }
+	// transport := &http.Transport{
+	// 	TLSClientConfig: config,
+	// }
+	// netClient := &http.Client{
+	// 	Transport: transport,
+	// }
+	// response, err := netClient.Get(baseURL)
+	// checkErr(err)
+	// body, err := ioutil.ReadAll(response.Body)
+	// checkErr(err)
+	// //fmt.Println(string(body))
+	// response.Body.Close()
+
+	// //hello
+	// //var hello = "hello dat"
+	// http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	// 	fmt.Fprintf(w, "hi")
+	// })
+	// http.HandleFunc("/hello-world", func(w http.ResponseWriter, r *http.Request) {
+	// 	fmt.Fprintf(w, string(body))
+	// })
+	// fmt.Print("hello")
+	// http.ListenAndServe(":8080", nil)
 
 	// db, err := sql.Open("mysql", "root:password1@tcp(127.0.0.1:3306)/test")
 	// if err != nil {
