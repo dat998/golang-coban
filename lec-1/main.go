@@ -3,18 +3,18 @@ package main
 import (
 	"fmt"
 
-	"github.com/kataras/iris"
+	///"github.com/kataras/iris"
+	"log"
+	"net/http"
 )
 
 //FUNCTION MAIN
 func main() {
-	app := iris.New()
-	app.RegisterView(iris.HTML("./view", ".html"))
-	app.Get("/", func(ctx iris.Context) {
-		ctx.View("index.html")
-	})
-	app.Run(iris.Addr(":5500"))
-	// //FIBONACCI
+	Port:= "5555"
+	http.Handlefunc("/",ServeFiles)
+	fmt.Println("Serving @ : ","127.0.0.1"+Port)
+	ListenAndServe(Port,nil)
+// //FIBONACCI
 
 	// 	var fibonancciValue int = 8
 	// 	fmt.Println(fibonacci(fibonancciValue))
@@ -113,9 +113,21 @@ func main() {
 	// 		fmt.Printf("giá trị %d không tồn tại\n", x)
 	// 	}
 }
-
 //FUNCTION
-
+func ServeFiles(w http.ResponseWriter, r *http.Request){
+	switch r.method{
+	case "GET":
+		path = r.URL.Path
+		fmt.Println(path)
+		if path =="/"{
+			path= "./html/index.html"
+		}else {
+			path = "."+path
+		}
+	case "POST":
+		r.ParseMultipartForm(0)
+	}
+}
 //dãy fibonacci
 func fibonacci(n int) int {
 	var value int = 2

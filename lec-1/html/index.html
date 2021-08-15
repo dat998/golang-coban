@@ -44,42 +44,52 @@
         }
     </style>
     <script>
-       // var nums = document.getElementsByClassName("value").innerHTML;
-        //var math = document.getElementById("math1");
+        var sign="";
+        var numb = {
+            number:[],
+            operator:[]
+        };
+        var num;
+        var numSubOne;
+        const url = "127.0.0.1:5555"
 
-        var num2;
-        var num1;
-        var sign;
-        var num = num1;
-        function myFunc(obj){
-            document.getElementById("sign1").innerHTML = obj.value
-            sign = document.getElementById("sign1").innerHTML
-            console.log(sign)
-        }
         function clickNumber(obj){
-            // document.getElementById("math1").innerHTML += obj.value
-            // num1 = document.getElementById("math1").innerHTML
-            // console.log(num)
-            //if(document.getElementById("sign1").innerHTML=="+"||document.getElementById("sign1").innerHTML=="-"||document.getElementById("sign1").innerHTML=="*"||document.getElementById("sign1").innerHTML=="/"){
+                if(sign==""&&(obj.value=="+"||obj.value=="-"||obj.value=="*"||obj.value=="/")){
+                }else if((numSubOne=="+"||numSubOne=="-"||numSubOne=="*"||numSubOne=="/")&&(obj.value=="+"||obj.value=="-"||obj.value=="*"||obj.value=="/")){
+
+                }else{
+                    document.getElementById("result").innerHTML += obj.value
+                    sign += obj.value;
+                    console.log(sign)
+                    numSubOne = obj.value;
+                }
                
-            if(document.getElementById("sign1").innerHTML=="sign"){
-                document.getElementById("math1").innerHTML += obj.value
-                num1 = document.getElementById("math1").innerHTML
-                console.log(num1)
-            }else{
-                document.getElementById("math2").innerHTML += obj.value
-                num2 = document.getElementById("math2").innerHTML
-                console.log(num2)
-            }
+
+                //alert(sign);
         }
+        
+
         function equal(){
-            document.getElementById("result").innerHTML =parseFloat(num1)+parseFloat(num2)
+            num = sign;
+            operator = sign;
+            num = num.match(/\d+/g);
+            operator = operator.match(/\D+/g)
+            // console.log(num);
+            // console.log(operator);
+            numb.number = num;
+            numb.operator = operator;
+            console.log(numb.number);
+            console.log(numb.operator);
+            fetch(url,{
+                method:"GET",
+                body:numb
+            })
+
         }
         function clear(){
-            document.getElementById("sign1").innerHTML =" "
-            document.getElementById("math1").innerHTML =" "
-            document.getElementById("math2").innerHTML = " "
-            document.getElementById("result").innerHTML = " "
+            document.getElementById("result").innerHTML = "";
+            sign = "";
+            num = operator = "";
         }
 
     </script>
@@ -87,19 +97,16 @@
 <body>
     <div class="calculator">
         <div class="tieu-de">
-            <p id="math1" style="font-size: 30px;float: right;margin: 0;padding: 0;width: 100%;height: 30px;"></p>
-            <p id="sign1" style="font-size: 20px;float: left;margin: 0;padding: 0;width: 100%;">sign</p>
-            <p id="math2" style="font-size: 30px;float: right;margin: 0;padding: 0;width: 100%;height: 30px;"></p>
-            <p id="result" style="font-size: 30px;float: right;margin: 0;padding: 0;">result</p>
+            <p id="result" style="font-size: 30px;float: right;margin: 0;padding: 0;"></p>
         </div>
         <div class="number">
             <table class="tab-number">
 
                 <tr>
-                    <button name="sign" class="math" value="+" onclick="myFunc(this)">+</button>
-                    <button name="sign" class="math" value="-" onclick="myFunc(this)">-</button>
-                    <button name="sign" class="math" value="*" onclick="myFunc(this)">*</button>
-                    <button name="sign" class="math" value="/" onclick="myFunc(this)">/</button>
+                    <button name="sign" class="math" value="+" onclick="clickNumber(this)">+</button>
+                    <button name="sign" class="math" value="-" onclick="clickNumber(this)">-</button>
+                    <button name="sign" class="math" value="*" onclick="clickNumber(this)">*</button>
+                    <button name="sign" class="math" value="/" onclick="clickNumber(this)">/</button>
                 </tr>
                 <tr>
                     <button class="value" value="1" onclick="clickNumber(this)">1</button>
@@ -116,7 +123,7 @@
                 <tr>
                     <button class="value" value="9" onclick="clickNumber(this)">9</button>
                     <button class="value" value="0" onclick="clickNumber(this)">0</button>
-                    <button class="value" value="ac" onclick="clear()">ac</button>
+                    <button onclick="document.getElementById('result').innerHTML = ''">ac</button>
                     <button class="value" value="=" onclick="equal()">=</button>
                 </tr>
             </table>
