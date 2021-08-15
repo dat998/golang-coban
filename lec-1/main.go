@@ -10,10 +10,8 @@ import (
 
 //FUNCTION MAIN
 func main() {
-	Port:= "5555"
-	http.Handlefunc("/",ServeFiles)
-	fmt.Println("Serving @ : ","127.0.0.1"+Port)
-	ListenAndServe(Port,nil)
+	http.HandleFunc("/", ServeFiles)
+	log.Fatal(http.ListenAndServe(":8081", nil))
 // //FIBONACCI
 
 	// 	var fibonancciValue int = 8
@@ -125,7 +123,7 @@ func ServeFiles(w http.ResponseWriter, r *http.Request){
 			path = "."+path
 		}
 	case "POST":
-		r.ParseMultipartForm(0)
+		r.ParseMultipartForm()
 	}
 }
 //dãy fibonacci
