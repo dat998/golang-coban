@@ -80,10 +80,14 @@
             numb.operator = operator;
             console.log(numb.number);
             console.log(numb.operator);
-            fetch(url,{
-                method:"GET",
-                body:numb
-            })
+            // fetch(url,{
+            //     method:"GET",
+            //     body:numb
+            // })
+            if (!('fetch' in window)) {
+                console.log('Fetch API not found, try including the polyfill');
+                return;
+            }
 
         }
         function clear(){
