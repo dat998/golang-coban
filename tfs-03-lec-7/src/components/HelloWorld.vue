@@ -51,7 +51,6 @@ export default {
   },
   methods:{
     clickNumber(x){
-     
       if(x=='='){
         //alert("equal")
         this.result=eval(this.result1+this.sign+this.result2)
@@ -59,27 +58,27 @@ export default {
         this.result2=""
         this.sign=""
       }else{
- //xu ly kiem tra ky tu dau tien va co phai dau hay khong
-      //xu ly xem co 2 dau duoc nhap ke tiep nhau hay k
-      if ((this.result=="" ||(this.numberSubOne=="+"||this.numberSubOne=="-"||this.numberSubOne=="*"||this.numberSubOne=="/"))&&(x=="+"||x=="-"||x=="*"||x=="/")){
-        console.log("Khong duoc nhap")
-      }else{
-        
-        
-        if(this.sign!=""){
-          this.result2+=x
-          this.result = this.result2
-        }
-        else{
-          if(x=="+"||x=="-"||x=="*"||x=="/"){
-            this.sign=x
-          }else{
-            this.result1+=x
-            this.result = this.result1
-            this.numberSubOne = x
-          }
+        //xu ly kiem tra ky tu dau tien va co phai dau hay khong
+        //xu ly xem co 2 dau duoc nhap ke tiep nhau hay k
+        if ((this.result=="" ||(this.numberSubOne=="+"||this.numberSubOne=="-"||this.numberSubOne=="*"||this.numberSubOne=="/"))&&(x=="+"||x=="-"||x=="*"||x=="/")){
+          console.log("Khong duoc nhap")
+        }else{
           
-        }
+          
+          if(this.sign!=""){
+            this.result2+=x
+            this.result = this.result2
+          }
+          else{
+            if(x=="+"||x=="-"||x=="*"||x=="/"){
+              this.sign=x
+            }else{
+              this.result1+=x
+              this.result = this.result1
+              this.numberSubOne = x
+            }
+            
+          }
         
         // console.log(x)
         console.log(this.result1)
