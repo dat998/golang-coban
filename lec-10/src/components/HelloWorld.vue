@@ -121,6 +121,7 @@ h4 {
   border-radius: 10px;
   background-color: rgb(80, 112, 255);
   margin: 10px 0px 10px 0px;
+  border: none;
 }
 .cancel {
   margin: 1rem 0 1rem 0;
