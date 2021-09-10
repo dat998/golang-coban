@@ -12,14 +12,15 @@ type Product struct{
 }
 func main()  {
 	fmt.Println("Go sql")
-	db, err:=sql.Open("mysql","tcdat:12345678@/product")
+	db, err:=sql.Open("mysql","dat:@Dat123456@/product")
 	if err != nil {
 		panic(err.Error())
 	}
 	defer db.Close();
 
 	fmt.Println("Successfull connect to mysql database");
-
+	product:= Product{2,"dien thoai2",30000000}
+	insertDB(db,product)
 
 	
 	result,err:=db.Query("select * from products")
@@ -38,5 +39,12 @@ func main()  {
 		fmt.Println(product.Price)
 	}
 	defer result.Close();
+	
+}
+func insertDB(db *sql.DB, product Product){
+	_,err:=db.Query("insert into products(id, name, price) values(?,?,?)",product.Id,product.Name,product.Price)
+	if err != nil {
+		panic(err.Error())
+	}
 	
 }
